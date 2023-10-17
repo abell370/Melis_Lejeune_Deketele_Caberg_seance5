@@ -5,19 +5,28 @@ public class ClockOffState extends State{
     }
 
     @Override
-    public void onOn() {
+    public void arm(String hour) {
+        clock.changeState(new ReadyState(clock));
+        System.out.println("Arm request: Clock turned on");
+        clock.setAlarm(hour);
     }
 
     @Override
-    public void onOff() {
+    public void disarm() {
         if (clock.isOn()) {
-            clock.changeState(new ClockOffState(clock));
-            System.out.println("Clock is turner off");
+            clock.setOn(false);
+            System.out.println("Disarm request: Clock turned off");
         }
     }
 
     @Override
-    public void onRing() {
-
+    public void stop() {
+        System.out.println("Stop request:  /!\\ nothing to stop");
     }
+
+    @Override
+    public void triggerAlarm() {
+        System.out.println("Trigger alarm request:  /!\\ Alarm is off");
+    }
+
 }

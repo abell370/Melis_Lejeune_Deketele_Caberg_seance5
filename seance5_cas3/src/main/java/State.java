@@ -4,8 +4,10 @@ public abstract class State {
     public State(Clock clock) {
         this.clock = clock;
     }
-    public abstract void onOn();
-    public abstract void onOff();
-    public abstract void onRing();
+
+    public abstract void arm(String hour);
+    public abstract void disarm();
+    public abstract void stop();
+    public abstract void triggerAlarm();
 
 }
