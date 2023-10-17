@@ -1,11 +1,21 @@
+import java.time.LocalDateTime;
+
 public class ReadyState extends State{
 
     public ReadyState(Clock clock){
         super(clock);
+        clock.changeState(new RingingState(clock));
+        int delta = LocalDateTime.now().compareTo(clock.getAlarmHour());
+        try {
+            Thread.sleep(delta);
+            clock.triggerAlarm();
+        } catch (Exception err) {
+
+        }
     }
 
     @Override
-    public void arm(String hour) {
+    public void arm(LocalDateTime hour) {
         System.out.println("Arm request: Alarm hour already set");
     }
 
@@ -23,7 +33,6 @@ public class ReadyState extends State{
 
     @Override
     public void triggerAlarm() {
-        clock.changeState(new RingingState(clock));
-        clock.triggerAlarm();
+        
     }
 }

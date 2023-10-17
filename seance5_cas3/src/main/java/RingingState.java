@@ -1,3 +1,5 @@
+import java.time.LocalDateTime;
+
 public class RingingState extends State{
 
     private Boolean ringOn;
@@ -7,7 +9,7 @@ public class RingingState extends State{
     }
 
     @Override
-    public void arm(String hour) {
+    public void arm(LocalDateTime hour) {
         System.out.println("Arm request: /!\\ Alarm is ringing..");
     }
 

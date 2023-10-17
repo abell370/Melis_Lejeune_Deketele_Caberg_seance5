@@ -1,7 +1,9 @@
+import java.time.LocalDateTime;
+
 public class Clock {
     private State state;
     private Boolean isOn;
-    private String alarmHour;
+    private LocalDateTime alarmHour;
     public Clock() {
         this.state = new ClockOffState(this);
         this.isOn = false;
@@ -13,13 +15,16 @@ public class Clock {
     public State getState(){
         return this.state;
     }
-    public void arm(String hour){
+    public void arm(LocalDateTime hour){
         state.arm(hour);
     }
     public void triggerAlarm() {
         state.triggerAlarm();
     }
 
+    public LocalDateTime getAlarmHour(){
+        return this.alarmHour;
+    }
     private boolean alarmTimeIsNow() {
         return true; // this.alarmHour == ?
     }
@@ -39,7 +44,7 @@ public class Clock {
         this.isOn = on;
     }
 
-    public void setAlarm(String hour) {
+    public void setAlarm(LocalDateTime hour) {
         this.alarmHour = hour;
     }
 }

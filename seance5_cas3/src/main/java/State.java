@@ -1,3 +1,5 @@
+import java.time.LocalDateTime;
+
 public abstract class State {
     Clock clock;
 
@@ -5,7 +7,7 @@ public abstract class State {
         this.clock = clock;
     }
 
-    public abstract void arm(String hour);
+    public abstract void arm(LocalDateTime hour);
     public abstract void disarm();
     public abstract void stop();
     public abstract void triggerAlarm();

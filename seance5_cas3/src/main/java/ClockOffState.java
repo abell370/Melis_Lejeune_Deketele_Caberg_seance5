@@ -1,3 +1,5 @@
+import java.time.LocalDateTime;
+
 public class ClockOffState extends State{
 
     public ClockOffState(Clock clock) {
@@ -5,7 +7,7 @@ public class ClockOffState extends State{
     }
 
     @Override
-    public void arm(String hour) {
+    public void arm(LocalDateTime hour) {
         clock.changeState(new ReadyState(clock));
         System.out.println("Arm request: Clock turned on");
         clock.setAlarm(hour);
