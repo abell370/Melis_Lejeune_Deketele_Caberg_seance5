@@ -1,11 +1,9 @@
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-
 public class RingingState extends State{
 
-    private Thread ringThread;
+    private Boolean ringOn;
     public RingingState(Clock clock){
         super(clock);
+        ringOn = false;
     }
 
     @Override
@@ -20,19 +18,24 @@ public class RingingState extends State{
 
     @Override
     public void stop() {
+        this.ringOn = false;
         clock.changeState(new ReadyState(clock));
         System.out.println("Stop request: Alarm ring stopped");
     }
 
     @Override
     public void triggerAlarm() {
-        for (int i = 10; i > 0; i--) {
-            System.out.println("dring dring..");
-            try {
-                Thread.sleep(200);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
-        }
+        this.ringOn = true;
+        Thread t = new Thread(() -> {
+            do {
+                System.out.println("dring dring..");
+                try {
+                    Thread.sleep(100);
+                } catch (Exception ex) {
+                    Thread.currentThread().interrupt();
+                }
+            } while (RingingState.this.ringOn);
+        });
+        t.start();
     }
 }
