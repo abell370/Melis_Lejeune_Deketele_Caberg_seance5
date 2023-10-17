@@ -5,17 +5,19 @@ public class ClockOffState extends State{
     }
 
     @Override
-    public String onOn() {
-        return null;
+    public void onOn() {
     }
 
     @Override
-    public String onOff() {
-        return null;
+    public void onOff() {
+        if (clock.isOn()) {
+            clock.changeState(new ClockOffState(clock));
+            System.out.println("Clock is turner off");
+        }
     }
 
     @Override
-    public String onRing() {
-        return null;
+    public void onRing() {
+
     }
 }
