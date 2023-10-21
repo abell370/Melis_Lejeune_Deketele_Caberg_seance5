@@ -10,15 +10,18 @@ import org.apache.http.client.utils.URIBuilder;
 public class App {
 
     public static void main(String[] args) {
+        String scheme = "https";
         String host = "gitlab.com";
         String path = "api/v4/projects/";
         String projectNb = "51311559"; //exemple de projet
 
         try {
+            //Mise en place du "monteur concret": "URIBuilder"
             URIBuilder uriBuilder = new URIBuilder();
-            uriBuilder.setScheme("https");
-            uriBuilder.setHost("gitlab.com");
-            uriBuilder.setPath("api/v4/projects/"+projectNb);            
+            uriBuilder.setScheme(scheme);
+            uriBuilder.setHost(host);
+            uriBuilder.setPath(path+projectNb);  
+            //Le produit URI reçoit l'URI construit précedemment
             URI uri = uriBuilder.build();
             URL url = uri.toURL();
             //afficher l'URL construite
