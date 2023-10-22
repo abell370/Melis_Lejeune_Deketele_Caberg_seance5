@@ -3,9 +3,12 @@ import java.time.LocalDateTime;
 public class RingingState extends State{
 
     private Boolean ringOn;
-    public RingingState(Clock clock){
+    public RingingState(Clock clock) throws InterruptedException {
         super(clock);
-        ringOn = false;
+        ringOn = true;
+        for (int i = 0; i < 5; i++) {
+            System.out.println("dring dring..");
+        }
     }
 
     @Override
@@ -20,24 +23,13 @@ public class RingingState extends State{
 
     @Override
     public void stop() {
-        this.ringOn = false;
-        clock.changeState(new ReadyState(clock));
-        System.out.println("Stop request: Alarm ring stopped");
+        try {
+            this.ringOn = false;
+            clock.changeState(new ReadyState(clock));
+            System.out.println("Stop request: Alarm ring stopped");
+        } catch (Exception err) {
+
+        }
     }
 
-    @Override
-    public void triggerAlarm() {
-        this.ringOn = true;
-        Thread t = new Thread(() -> {
-            do {
-                System.out.println("dring dring..");
-                try {
-                    Thread.sleep(100);
-                } catch (Exception ex) {
-                    Thread.currentThread().interrupt();
-                }
-            } while (RingingState.this.ringOn);
-        });
-        t.start();
-    }
 }

@@ -18,9 +18,6 @@ public class Clock {
     public void arm(LocalDateTime hour){
         state.arm(hour);
     }
-    public void triggerAlarm() {
-        state.triggerAlarm();
-    }
 
     public LocalDateTime getAlarmHour(){
         return this.alarmHour;

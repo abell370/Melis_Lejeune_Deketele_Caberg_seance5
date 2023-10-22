@@ -10,6 +10,5 @@ public abstract class State {
     public abstract void arm(LocalDateTime hour);
     public abstract void disarm();
     public abstract void stop();
-    public abstract void triggerAlarm();
 
 }

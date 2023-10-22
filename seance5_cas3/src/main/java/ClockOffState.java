@@ -8,9 +8,9 @@ public class ClockOffState extends State{
 
     @Override
     public void arm(LocalDateTime hour) {
-        clock.changeState(new ReadyState(clock));
         System.out.println("Arm request: Clock turned on");
         clock.setAlarm(hour);
+        clock.changeState(new ReadyState(clock));
     }
 
     @Override
@@ -25,10 +25,4 @@ public class ClockOffState extends State{
     public void stop() {
         System.out.println("Stop request:  /!\\ nothing to stop");
     }
-
-    @Override
-    public void triggerAlarm() {
-        System.out.println("Trigger alarm request:  /!\\ Alarm is off");
-    }
-
 }

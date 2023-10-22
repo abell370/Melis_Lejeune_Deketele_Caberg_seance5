@@ -1,14 +1,17 @@
+import java.time.Duration;
 import java.time.LocalDateTime;
+import java.time.Period;
 
 public class ReadyState extends State{
 
     public ReadyState(Clock clock){
         super(clock);
-        clock.changeState(new RingingState(clock));
-        int delta = LocalDateTime.now().compareTo(clock.getAlarmHour());
+        System.out.println("Clock in ready state");
         try {
-            Thread.sleep(delta);
-            clock.triggerAlarm();
+            Duration duration = Duration.between(LocalDateTime.now(), clock.getAlarmHour());
+            System.out.println("Clock in ready state: wait to trigger alarm");
+            Thread.sleep(duration.toMillis());
+            clock.changeState(new RingingState(clock));
         } catch (Exception err) {
 
         }
@@ -31,8 +34,4 @@ public class ReadyState extends State{
         System.out.println("Stop request: Alarm is turned off ");
     }
 
-    @Override
-    public void triggerAlarm() {
-        
-    }
 }
